@@ -1,6 +1,6 @@
 import React from 'react';
 
-const listOfTable = () => {
+const ListOfTable = () => {
   return (
     <div>
       <h1>listOfTable</h1>
@@ -8,4 +8,4 @@ const listOfTable = () => {
   );
 };
 
-export default listOfTable;
+export default ListOfTable;
