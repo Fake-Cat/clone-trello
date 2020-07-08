@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { useMessage } from '../../hooks/message.hook';
+import { createBoard } from '../../redux/action';
 
 import './createTable.scss';
 
 const CreateTable = () => {
-  const history = useHistory();
 
+  const history = useHistory();
+  const dispatch = useDispatch();
+  
   //* сброс инпутов *//
   useEffect(() => {
     window.M.updateTextFields();
@@ -28,18 +32,13 @@ const CreateTable = () => {
   };
 
   const onChangeSubmit = () => {
-    if (!create) {
-      validateFormInput(form);
-    } else {
-      history.push('/list');
-    }
+    validateFormInput(form);
   };
 
   /* валидация формы */
   const message = useMessage();
-  const [name, setName] = useState(null);
-  const [logo, setLogo] = useState(null);
-  const [create, setCreate] = useState(null);
+  const [nameError, setNameError] = useState(null);
+  const [logoError, setLogoError] = useState(null);
 
   const validateFormInput = useCallback(
     ({ name, logo }) => {
@@ -48,27 +47,30 @@ const CreateTable = () => {
       const statusOk = 'Таблица создана';
       try {
         if (logo && name) {
+          dispatch(createBoard(form));
           message(statusOk);
-          setCreate({ create: statusOk });
+          history.push('/list');
         } else {
-          throw new Error(nameError, logoError);
+          throw new Error();
         }
       } catch (error) {
         if (!name) {
           message(nameError);
-          setName({ name: nameError });
+          setNameError({ name: nameError });
         } else {
-          setName(null);
+          message(null);
+          setNameError(null);
         }
         if (!logo) {
           message(logoError);
-          setLogo({ logo: logoError });
+          setLogoError({ logo: logoError });
         } else {
-          setLogo(null);
+          message(null);
+          setLogoError(null);
         }
       }
     },
-    [message]
+    [message, history, dispatch, form]
   );
 
   return (
@@ -82,7 +84,7 @@ const CreateTable = () => {
               name="name"
               type="text"
               onChange={changeHandler}
-              className={!name ? 'blue-input' : 'error'}
+              className={!nameError ? 'blue-input' : 'error'}
             />
             <label htmlFor="name">Название доски</label>
           </div>
@@ -91,7 +93,7 @@ const CreateTable = () => {
               placeholder="http://site.ru/img"
               name="logo"
               type="text"
-              className={!logo ? 'blue-input' : 'error'}
+              className={!logoError ? 'blue-input' : 'error'}
               onChange={changeHandler}
             />
             <label htmlFor="logo">Вставьте URL-ссылку логотипа*</label>
@@ -106,25 +108,14 @@ const CreateTable = () => {
             <label htmlFor="description">Описание доски</label>
           </div>
           <div className="center-align">
-            {!create ? (
-              <button
-                className="btn waves-effect waves-light  blue darken-1"
-                type="submit"
-                onClick={onChangeSubmit}
-              >
-                Создать
-                <i className="material-icons right">send</i>
-              </button>
-            ) : (
-              <button
-                className="btn waves-effect waves-light  blue darken-1 pulse"
-                type="submit"
-                onClick={onChangeSubmit}
-              >
-                перейти
-                <i className="material-icons right">send</i>
-              </button>
-            )}
+            <button
+              className="btn waves-effect waves-light  blue darken-1"
+              type="submit"
+              onClick={onChangeSubmit}
+            >
+              Создать
+              <i className="material-icons right">send</i>
+            </button>
           </div>
         </div>
       </div>
