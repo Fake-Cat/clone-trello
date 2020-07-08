@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { useMessage } from '../../hooks/message.hook';
 
 import './createTable.scss';
-import { useHistory } from 'react-router-dom';
 
 const CreateTable = () => {
   const history = useHistory();
@@ -10,7 +12,6 @@ const CreateTable = () => {
   useEffect(() => {
     window.M.updateTextFields();
   }, []);
-  //* сброс инпутов *//
 
   //* обработка формы *//
   const [form, setForm] = useState({
@@ -33,35 +34,43 @@ const CreateTable = () => {
       history.push('/list');
     }
   };
-  //* обработка формы **//
 
   /* валидация формы */
+  const message = useMessage();
   const [name, setName] = useState(null);
   const [logo, setLogo] = useState(null);
   const [create, setCreate] = useState(null);
 
-  const validateFormInput = ({ name, logo }) => {
-    const nameError = 'Проверьте правильность заполнения названия доски';
-    const logoError = 'Проверьте правильность URL-изображения';
-    const statusOk = 'Таблица создана';
-    if (!name) {
-      window.M.toast({ html: nameError });
-      setName({ name: nameError });
-    } else {
-      setName(null);
-    }
-    if (!logo) {
-      window.M.toast({ html: logoError });
-      setLogo({ logo: logoError });
-    } else {
-      setLogo(null);
-    }
-    if (logo && name) {
-      window.M.toast({ html: statusOk });
-      setCreate({ create: statusOk });
-    }
-  };
-  /* валидация формы */
+  const validateFormInput = useCallback(
+    ({ name, logo }) => {
+      const nameError = 'Проверьте правильность заполнения названия доски';
+      const logoError = 'Проверьте правильность URL-изображения';
+      const statusOk = 'Таблица создана';
+      try {
+        if (logo && name) {
+          message(statusOk);
+          setCreate({ create: statusOk });
+        } else {
+          throw new Error(nameError, logoError);
+        }
+      } catch (error) {
+        if (!name) {
+          message(nameError);
+          setName({ name: nameError });
+        } else {
+          setName(null);
+        }
+        if (!logo) {
+          message(logoError);
+          setLogo({ logo: logoError });
+        } else {
+          setLogo(null);
+        }
+      }
+    },
+    [message]
+  );
+
   return (
     <div className="container">
       <h1 className="center">Создание доски</h1>
@@ -97,14 +106,25 @@ const CreateTable = () => {
             <label htmlFor="description">Описание доски</label>
           </div>
           <div className="center-align">
-            <button
-              className="btn waves-effect waves-light  blue darken-1"
-              type="submit"
-              onClick={onChangeSubmit}
-            >
-              Создать
-              <i className="material-icons right">send</i>
-            </button>
+            {!create ? (
+              <button
+                className="btn waves-effect waves-light  blue darken-1"
+                type="submit"
+                onClick={onChangeSubmit}
+              >
+                Создать
+                <i className="material-icons right">send</i>
+              </button>
+            ) : (
+              <button
+                className="btn waves-effect waves-light  blue darken-1 pulse"
+                type="submit"
+                onClick={onChangeSubmit}
+              >
+                перейти
+                <i className="material-icons right">send</i>
+              </button>
+            )}
           </div>
         </div>
       </div>
