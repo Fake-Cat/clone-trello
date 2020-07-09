@@ -1,4 +1,4 @@
-import { CREATE_BOARD, CURRENT_BOARD } from './types';
+import { CREATE_BOARD, CURRENT_BOARD, ADD_CARD_TO_BOARD } from './types';
 import { uuid } from 'uuidv4';
 
 export function createBoard({ name, logo, text }) {
@@ -12,7 +12,6 @@ export function createBoard({ name, logo, text }) {
           name: name,
           logo: logo,
           text: text,
-          card: [],
         },
       ];
       dispatch({ type: CREATE_BOARD, payload: board });
@@ -24,7 +23,6 @@ export function createBoard({ name, logo, text }) {
           logo:
             'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
           text: text,
-          card: [],
         },
       ];
       dispatch({ type: CREATE_BOARD, payload: board });
@@ -35,6 +33,13 @@ export function createBoard({ name, logo, text }) {
 export function currentBoardSelected(item) {
   return {
     type: CURRENT_BOARD,
+    payload: item,
+  };
+}
+
+export function addCard(item) {
+  return {
+    type: ADD_CARD_TO_BOARD,
     payload: item,
   };
 }

@@ -1,4 +1,8 @@
-import { CREATE_BOARD, CURRENT_BOARD } from '../action/types';
+import {
+  CREATE_BOARD,
+  CURRENT_BOARD,
+  ADD_CARD_TO_BOARD,
+} from '../action/types';
 
 let initialState = {
   board: [
@@ -14,10 +18,11 @@ let initialState = {
   currentBoard: {
     id: '6d1c7f21-68db-433c-a37a-26467363672b',
     name: 'тест',
-    logo: 'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
+    logo:
+      'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
     text: 'описание',
-    card: []
-  }
+    card: [],
+  },
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -32,6 +37,10 @@ export const appReducer = (state = initialState, action) => {
         ...state,
         currentBoard: action.payload,
       };
+   /*  case ADD_CARD_TO_BOARD:
+      return {
+        ...state,
+      }; */
     default:
       return state;
   }

@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 const boardPanel = ({ boardName }) => {
   return (
-    <div className="board indigo darken-1">
+    <div className="board indigo darken-1 valign-wrapper">
       <Link to="/list-of-board" className="board-link">
-        <i class="material-icons board-icon">keyboard_backspace</i>
+        <i className="material-icons board-icon">keyboard_backspace</i>
       </Link>
 
       <span className="board-name">{boardName}</span>

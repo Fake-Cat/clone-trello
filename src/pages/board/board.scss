@@ -1,0 +1,18 @@
+.ml20 {
+  margin-left: 20px !important;
+}
+.mt40 {
+  margin-top: 40px !important;
+}
+.mb20{
+  margin-bottom: 20px !important;
+}
+.flex-1 {
+  flex: 1;
+}
+.close {
+  cursor: pointer;
+  &:hover {
+    color: red !important;
+  }
+}
