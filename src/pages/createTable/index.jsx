@@ -8,10 +8,9 @@ import { createBoard } from '../../redux/action';
 import './createTable.scss';
 
 const CreateTable = () => {
-
   const history = useHistory();
   const dispatch = useDispatch();
-  
+
   //* сброс инпутов *//
   useEffect(() => {
     window.M.updateTextFields();
@@ -49,7 +48,7 @@ const CreateTable = () => {
         if (logo && name) {
           dispatch(createBoard(form));
           message(statusOk);
-          history.push('/list');
+          history.push('/list-of-board');
         } else {
           throw new Error();
         }

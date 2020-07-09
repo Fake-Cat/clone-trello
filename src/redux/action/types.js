@@ -1,1 +1,2 @@
-export const CREATE_BOARD = 'CREATE_BOARD'
+export const CREATE_BOARD = 'CREATE_BOARD';
+export const CURRENT_BOARD = 'CURRENT_BOARD';

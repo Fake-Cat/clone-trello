@@ -1,0 +1,25 @@
+.board {
+  display: flex !important;
+  align-items: center !important;
+  padding: 10px !important;
+  &-name {
+    font-size: 20px !important;
+    margin-left: 10px !important;
+    font-weight: bold !important;
+    color: #fff;
+  }
+  &-icon {
+    margin-left: 20px !important;
+    font-size: 30px !important;
+    color: #fff !important;
+    user-select: none;
+    cursor: pointer;
+    transition: color ease-out 0.8s;
+    &:hover {
+      color: #000000  !important;
+    }
+  }
+  &-link {
+    display: inline-flex !important;
+  }
+}

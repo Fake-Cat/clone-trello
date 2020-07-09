@@ -1,8 +1,9 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import CreateTable from './components/createTable';
-import ListOfTable from './components/listOfTable';
+import CreateTable from './pages/createTable';
+import ListOfBoard from './pages/listOfBoard';
+import Board from './pages/board';
 
 const useRoutes = () => {
   return (
@@ -10,8 +11,11 @@ const useRoutes = () => {
       <Route path="/create" exact>
         <CreateTable />
       </Route>
-      <Route path="/list" exact>
-        <ListOfTable />
+      <Route path="/list-of-board" exact>
+        <ListOfBoard />
+      </Route>
+      <Route path="/:BoardId">
+        <Board />
       </Route>
       <Redirect to="/create" />
     </Switch>

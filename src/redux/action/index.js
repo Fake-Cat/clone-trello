@@ -1,4 +1,5 @@
-import { CREATE_BOARD } from './types';
+import { CREATE_BOARD, CURRENT_BOARD } from './types';
+import { uuid } from 'uuidv4';
 
 export function createBoard({ name, logo, text }) {
   return (dispatch) => {
@@ -7,22 +8,33 @@ export function createBoard({ name, logo, text }) {
     if (result) {
       const board = [
         {
+          id: uuid(),
           name: name,
           logo: logo,
           text: text,
+          card: [],
         },
       ];
       dispatch({ type: CREATE_BOARD, payload: board });
     } else {
       const board = [
         {
+          id: uuid(),
           name: name,
           logo:
             'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
           text: text,
+          card: [],
         },
       ];
       dispatch({ type: CREATE_BOARD, payload: board });
     }
+  };
+}
+
+export function currentBoardSelected(item) {
+  return {
+    type: CURRENT_BOARD,
+    payload: item,
   };
 }
