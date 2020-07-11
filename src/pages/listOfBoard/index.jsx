@@ -7,8 +7,8 @@ import { currentBoardSelected } from '../../redux/action';
 import './listOfBoard.scss';
 
 class ListOfBoard extends React.Component {
-  handleSubmit = (item) => {
-    this.props.currentBoardSelected(item);
+  handleSubmit = (item, id) => {
+    this.props.currentBoardSelected(item, id);
   };
   render() {
     if (this.props.board.length === 0) {
@@ -47,11 +47,11 @@ class ListOfBoard extends React.Component {
                     <p>{item.text}</p>
                   </div>
                   <div className="card-action center-align  ">
-                    <Link to={`board/${item.id}`}>
+                    <Link to={`board/${item.link}`}>
                       <button
                         className="btn waves-effect waves-light blue darken-1 width100"
                         type="submit"
-                        onClick={() => this.handleSubmit(item)}
+                        onClick={() => this.handleSubmit(item, id)}
                       >
                         Открыть
                       </button>
@@ -72,8 +72,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    currentBoardSelected: (item) => {
-      dispatch(currentBoardSelected(item));
+    currentBoardSelected: (item, id) => {
+      dispatch(currentBoardSelected(item, id));
     },
   };
 };

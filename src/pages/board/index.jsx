@@ -34,46 +34,61 @@ class Board extends React.Component {
       text: e.target.value,
     });
   };
-
+  onClickAddCart = (text) => {
+    this.props.addCard(text);
+    this.setState({
+      formOpen: false,
+    });
+  };
   render() {
     return (
       <div className="container-fluid">
+        <BoardPanel boardName={this.props.board.name} />
         <div className="row">
-          <BoardPanel boardName={this.props.board.name} />
-          {this.state.formOpen ? (
-            <div className="input-field col s3 ml20 mt40">
-              <textarea
-                id="description"
-                className="materialize-textarea mb20"
-                name="text"
-                onChange={this.handleInputText}
-              />
-              <label htmlFor="description">Введите название карточки</label>
-              <div className="valign-wrapper">
-                <button
-                  className="waves-effect waves-light btn teal lighten-1  flex-1"
-                  onClick={() => this.props.addCard(this.state.text)}
-                >
-                  <i className="material-icons left ">add</i> Добавить карточку
-                </button>
-                <i
-                  className="material-icons right close"
-                  onClick={() =>  this.closeForm()}
-                >
-                  close
-                </i>
-              </div>
+          <section className="column mt20">
+            <div className="column-block">
+              <span className="column-block__title">test</span>
+              <ul>
+                <li className="column-block__text">1</li>
+                <li className="column-block__text">2</li>
+                <li className="column-block__text">3</li>
+              </ul>
             </div>
-          ) : (
-            <div className="mt20">
+
+            {this.state.formOpen ? (
+              <div className="input-field col s3 ml20 ">
+                <textarea
+                  id="description"
+                  className="materialize-textarea mb20"
+                  name="text"
+                  onChange={this.handleInputText}
+                />
+                <label htmlFor="description">Введите название карточки</label>
+                <div className="valign-wrapper">
+                  <button
+                    className="waves-effect waves-light btn teal lighten-1  flex-1"
+                    onClick={() => this.onClickAddCart(this.state.text)}
+                  >
+                    <i className="material-icons left ">add</i> Добавить
+                    карточку
+                  </button>
+                  <i
+                    className="material-icons right close"
+                    onClick={() => this.closeForm()}
+                  >
+                    close
+                  </i>
+                </div>
+              </div>
+            ) : (
               <button
                 className="waves-effect waves-light btn deep-purple lighten-5 black-text ml20"
                 onClick={() => this.openForm()}
               >
                 <i className="material-icons left">add</i> Добавить карточку
               </button>
-            </div>
-          )}
+            )}
+          </section>
         </div>
       </div>
     );
@@ -81,13 +96,12 @@ class Board extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  board: state.app.currentBoard,
+  board: state.app.currentBoard.currentItemBoard,
 });
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCard: (item) => {
-      debugger;
-      dispatch(addCard(item));
+    addCard: (text) => {
+      dispatch(addCard(text));
     },
   };
 };

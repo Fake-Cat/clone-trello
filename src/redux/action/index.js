@@ -8,21 +8,23 @@ export function createBoard({ name, logo, text }) {
     if (result) {
       const board = [
         {
-          id: uuid(),
+          link: uuid(),
           name: name,
           logo: logo,
           text: text,
+          card: [],
         },
       ];
       dispatch({ type: CREATE_BOARD, payload: board });
     } else {
       const board = [
         {
-          id: uuid(),
+          link: uuid(),
           name: name,
           logo:
             'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
           text: text,
+          card: [],
         },
       ];
       dispatch({ type: CREATE_BOARD, payload: board });
@@ -30,16 +32,20 @@ export function createBoard({ name, logo, text }) {
   };
 }
 
-export function currentBoardSelected(item) {
+export function currentBoardSelected(item, id) {
+  const currentItem = {
+    current: id,
+    currentItemBoard: item,
+  };
   return {
     type: CURRENT_BOARD,
-    payload: item,
+    payload: currentItem,
   };
 }
 
-export function addCard(item) {
+export function addCard(text) {
   return {
     type: ADD_CARD_TO_BOARD,
-    payload: item,
+    payload: text,
   };
 }
