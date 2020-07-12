@@ -7,28 +7,28 @@ import {
 let initialState = {
   board: [
     {
-      link: '6d1c7f21-68db-433c-a37a-26467363672b',
-      name: 'тест',
+      link: '996b942d-e716-4345-bbe4-d0ea16945887',
+      name: 'Сергей',
       logo:
         'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
-      text: 'описание',
+      text: '123123',
       card: [],
     },
   ],
   currentBoard: {
-    current: 0,
-    currentItemBoard: {
-      link: '6d1c7f21-68db-433c-a37a-26467363672b',
-      name: 'тест',
+    id: 0,
+    item: {
+      link: '996b942d-e716-4345-bbe4-d0ea16945887',
+      name: 'Сергей',
       logo:
         'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
-      text: 'описание',
+      text: '123123',
       card: [],
     },
   },
 };
 
-export const appReducer = (state = initialState, action) => {
+export const boardReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_BOARD:
       return {
@@ -41,12 +41,11 @@ export const appReducer = (state = initialState, action) => {
         currentBoard: action.payload,
       };
     case ADD_CARD_TO_BOARD:
-      const currentItem = state.currentBoard.current;
+      const currentItem = state.currentBoard.id;
+      const currentCard = state.board[currentItem].card;
       return {
         ...state,
-        [state.board[currentItem].card]: state.board[currentItem].card.push(
-          action.payload
-        ),
+        [currentCard]: [...currentCard, action.payload],
       };
     default:
       return state;

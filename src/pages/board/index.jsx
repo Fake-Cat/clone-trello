@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import BoardPanel from '../../components/boardPanel';
+import { addCard } from '../../redux/action';
+import FormAdd from '../../components/formAdd';
+import ButtonAdd from '../../components/buttonAdd';
 
 import './board.scss';
-import { addCard } from '../../redux/action';
 
 class Board extends React.Component {
   constructor(props) {
@@ -34,8 +36,8 @@ class Board extends React.Component {
       text: e.target.value,
     });
   };
-  onClickAddCart = (text) => {
-    this.props.addCard(text);
+  onClickAddCart = () => {
+    this.props.addCard(this.state.text);
     this.setState({
       formOpen: false,
     });
@@ -54,39 +56,14 @@ class Board extends React.Component {
                 <li className="column-block__text">3</li>
               </ul>
             </div>
-
             {this.state.formOpen ? (
-              <div className="input-field col s3 ml20 ">
-                <textarea
-                  id="description"
-                  className="materialize-textarea mb20"
-                  name="text"
-                  onChange={this.handleInputText}
-                />
-                <label htmlFor="description">Введите название карточки</label>
-                <div className="valign-wrapper">
-                  <button
-                    className="waves-effect waves-light btn teal lighten-1  flex-1"
-                    onClick={() => this.onClickAddCart(this.state.text)}
-                  >
-                    <i className="material-icons left ">add</i> Добавить
-                    карточку
-                  </button>
-                  <i
-                    className="material-icons right close"
-                    onClick={() => this.closeForm()}
-                  >
-                    close
-                  </i>
-                </div>
-              </div>
+              <FormAdd
+                closeForm={this.closeForm}
+                handleInputText={this.handleInputText}
+                onClickAddCart={this.onClickAddCart}
+              />
             ) : (
-              <button
-                className="waves-effect waves-light btn deep-purple lighten-5 black-text ml20"
-                onClick={() => this.openForm()}
-              >
-                <i className="material-icons left">add</i> Добавить карточку
-              </button>
+              <ButtonAdd openForm={this.openForm} />
             )}
           </section>
         </div>
@@ -96,7 +73,7 @@ class Board extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  board: state.app.currentBoard.currentItemBoard,
+  board: state.app.currentBoard.item,
 });
 const mapDispatchToProps = (dispatch) => {
   return {

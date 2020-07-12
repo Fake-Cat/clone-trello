@@ -34,8 +34,8 @@ export function createBoard({ name, logo, text }) {
 
 export function currentBoardSelected(item, id) {
   const currentItem = {
-    current: id,
-    currentItemBoard: item,
+    id,
+    item,
   };
   return {
     type: CURRENT_BOARD,
@@ -44,8 +44,12 @@ export function currentBoardSelected(item, id) {
 }
 
 export function addCard(text) {
+  const card = {
+    title: text,
+    item: [],
+  };
   return {
     type: ADD_CARD_TO_BOARD,
-    payload: text,
+    payload: card,
   };
 }
