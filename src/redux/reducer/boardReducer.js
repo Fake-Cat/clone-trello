@@ -45,7 +45,7 @@ export const boardReducer = (state = initialState, action) => {
       const currentCard = state.board[currentItem].card;
       return {
         ...state,
-        [currentCard]: [...currentCard, action.payload],
+        ...currentCard.push(action.payload),
       };
     default:
       return state;

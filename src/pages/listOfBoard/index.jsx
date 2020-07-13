@@ -70,12 +70,4 @@ const mapStateToProps = (state) => ({
   board: state.app.board,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    currentBoardSelected: (item, id) => {
-      dispatch(currentBoardSelected(item, id));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListOfBoard);
+export default connect(mapStateToProps, { currentBoardSelected })(ListOfBoard);

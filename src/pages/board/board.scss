@@ -4,9 +4,6 @@
 .mb20 {
   margin-bottom: 20px !important;
 }
-.mt20 {
-  margin-top: 20px;
-}
 .flex-1 {
   flex: 1;
 }
@@ -16,34 +13,171 @@
     color: red !important;
   }
 }
+.formAdd {
+  width: 300px;
+}
+.board-block {
+  height: 100vh;
+}
 .column {
   display: flex;
   align-items: flex-start;
   flex-wrap: nowrap;
-}
-.column-block {
-  background-color: #dfe1e6;
-  border-radius: 5px;
-  box-sizing: border-box;
-  min-width: 300px;
-  min-height: 300px;
-  padding: 10px 20px;
-  &__title {
-    display: block;
-    margin: 10px 0 0 10px;
-    font-size: 20px;
-    font-weight: bold;
+  padding: 10px 0 0 10px;
+  height: calc(100% - 50px);
+  &-wrapper {
+    width: 290px;
+    height: calc(100% - 40px);
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    margin: 0 4px;
   }
-  &__text {
-    width: 100%;
-    height: 40px;
-    background-color: #fff;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 14px;
+  &-block {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 3px;
+    box-sizing: border-box;
+    white-space: normal;
+    margin: 0 4px;
+    max-height: 100%;
+    background-color: #dfe1e6;
+    &__title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      font-weight: bold;
+    }
+    &__list {
+      padding: 0 12px !important;
+      overflow-y: auto;
+    }
+    &__text {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(9, 45, 66, 0.25);
+      border-radius: 3px;
+      padding: 12px;
+      margin-bottom: 8px;
+      line-height: 19px;
+      white-space: normal;
+    }
+  }
+  &-form {
+    padding: 0 12px;
+    &__textarea {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 80px;
+      resize: none;
+      margin-bottom: 8px;
+      line-height: 19px;
+      white-space: normal;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(9, 45, 66, 0.25);
+      border-radius: 3px;
+      padding: 5px;
+      &:focus {
+        outline: none;
+      }
+    }
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      &-addcard {
+        width: 100%;
+        padding: 10px;
+        cursor: pointer;
+        &:hover {
+          background-color: darken(#dfe1e6, 5%);
+        }
+      }
+    }
   }
 }
 
+/*   &-block {
+    display: flex;
+    flex-direction: column;
+    background-color: #ede7f6;
+    border-radius: 2px;
+    max-height: 100%;
+    width: 300px;
+    &__title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+    }
+    &__list {
+      padding: 0 12px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    &__text {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(9, 45, 66, 0.25);
+      border-radius: 3px;
+      padding: 12px;
+      margin-bottom: 8px;
+      line-height: 19px;
+      white-space: normal;
+    }
+  }
+  &-form {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &-addcard {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        &:hover {
+          background-color: darken(#ede7f6, 5%);
+        }
+      }
+    }
+    &__textarea {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(9,45,66,.25);
+      border-radius: 3px;
+      padding: 12px;
+      margin-bottom: 8px;
+      line-height: 19px;
+      white-space: normal;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+ */
 /* .cacolumnrd::-webkit-scrollbar {
   display: none;
 } */

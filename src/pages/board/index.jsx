@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 
 import BoardPanel from '../../components/boardPanel';
 import { addCard } from '../../redux/action';
-import FormAdd from '../../components/formAdd';
-import ButtonAdd from '../../components/buttonAdd';
+import FormAddColumn from '../../components/formAddColumn';
+import ButtonAddColumn from '../../components/buttonAddColumn';
+import ButtonAddCard from '../../components/buttonAddCard';
+import FormAddCard from '../../components/formAddCard';
 
 import './board.scss';
 
@@ -12,12 +14,34 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
 
+    // добавление колонки
     this.state = {
       formOpen: false,
       text: '',
+      formAddOpen: false,
+      card: '',
     };
   }
+  // добавление карточки
+  formAddOpen = () => {
+    this.setState({
+      formAddOpen: true,
+    });
+  };
 
+  closeAddForm = () => {
+    this.setState({
+      formAddOpen: false,
+      card: '',
+    });
+  };
+  handleITeaxAreaText = (e) => {
+    this.setState({
+      card: e.target.value,
+    });
+  };
+
+  // добавление колонки
   openForm = () => {
     this.setState({
       formOpen: true,
@@ -45,27 +69,39 @@ class Board extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <BoardPanel boardName={this.props.board.name} />
-        <div className="row">
-          <section className="column mt20">
-            <div className="column-block">
-              <span className="column-block__title">test</span>
-              <ul>
-                <li className="column-block__text">1</li>
-                <li className="column-block__text">2</li>
-                <li className="column-block__text">3</li>
-              </ul>
+        <div className="board-block">
+          <BoardPanel boardName={this.props.board.name} />
+          <div className="column">
+            <div className="column-wrapper">
+              <div className="column-block">
+                <span className="column-block__title">test</span>
+                <ul className="column-block__list">
+                  <li className="column-block__text">1</li>
+                  <li className="column-block__text">2</li>
+                  <li className="column-block__text">1</li>
+                  <li className="column-block__text">2</li>
+                  <li className="column-block__text">1</li>
+                </ul>
+                {this.state.formAddOpen ? (
+                  <FormAddCard
+                    closeAddForm={this.closeAddForm}
+                    handleITeaxAreaText={this.handleITeaxAreaText}
+                  />
+                ) : (
+                  <ButtonAddCard formAddOpen={this.formAddOpen} />
+                )}
+              </div>
             </div>
             {this.state.formOpen ? (
-              <FormAdd
+              <FormAddColumn
                 closeForm={this.closeForm}
                 handleInputText={this.handleInputText}
                 onClickAddCart={this.onClickAddCart}
               />
             ) : (
-              <ButtonAdd openForm={this.openForm} />
+              <ButtonAddColumn openForm={this.openForm} />
             )}
-          </section>
+          </div>
         </div>
       </div>
     );
@@ -75,11 +111,5 @@ class Board extends React.Component {
 const mapStateToProps = (state) => ({
   board: state.app.currentBoard.item,
 });
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addCard: (text) => {
-      dispatch(addCard(text));
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+
+export default connect(mapStateToProps, { addCard })(Board);
