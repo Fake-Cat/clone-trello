@@ -6,7 +6,7 @@ const ButtonAddColumn = ({ openForm }) => {
       className="waves-effect waves-light btn deep-purple lighten-5 black-text ml20 btnAddColumn"
       onClick={() => openForm()}
     >
-      <i className="material-icons left">add</i> Добавить колонку
+      <i className="material-icons left">add</i> <span>Добавить колонку</span>
     </button>
   );
 };

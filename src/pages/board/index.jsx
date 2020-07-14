@@ -5,8 +5,7 @@ import BoardPanel from '../../components/boardPanel';
 import { addCard } from '../../redux/action';
 import FormAddColumn from '../../components/formAddColumn';
 import ButtonAddColumn from '../../components/buttonAddColumn';
-import ButtonAddCard from '../../components/buttonAddCard';
-import FormAddCard from '../../components/formAddCard';
+import FormAddCard from '../../pages/formAddCard';
 
 import './board.scss';
 
@@ -17,30 +16,9 @@ class Board extends React.Component {
     // добавление колонки
     this.state = {
       formOpen: false,
-      text: '',
-      formAddOpen: false,
-      card: '',
+      column: null,
     };
   }
-  // добавление карточки
-  formAddOpen = () => {
-    this.setState({
-      formAddOpen: true,
-    });
-  };
-
-  closeAddForm = () => {
-    this.setState({
-      formAddOpen: false,
-      card: '',
-    });
-  };
-  handleITeaxAreaText = (e) => {
-    this.setState({
-      card: e.target.value,
-    });
-  };
-
   // добавление колонки
   openForm = () => {
     this.setState({
@@ -51,47 +29,53 @@ class Board extends React.Component {
   closeForm = () => {
     this.setState({
       formOpen: false,
-      text: '',
+      column: null,
     });
   };
 
   handleInputText = (e) => {
     this.setState({
-      text: e.target.value,
+      column: e.target.value,
     });
   };
   onClickAddCart = () => {
-    this.props.addCard(this.state.text);
+    this.props.addCard(this.state.column);
     this.setState({
       formOpen: false,
+      column: null,
     });
   };
   render() {
     return (
       <div className="container-fluid">
         <div className="board-block">
-          <BoardPanel boardName={this.props.board.name} />
+          <BoardPanel boardName={this.props.card[this.props.id].name} />
           <div className="column">
-            <div className="column-wrapper">
-              <div className="column-block">
-                <span className="column-block__title">test</span>
-                <ul className="column-block__list">
-                  <li className="column-block__text">1</li>
-                  <li className="column-block__text">2</li>
-                  <li className="column-block__text">1</li>
-                  <li className="column-block__text">2</li>
-                  <li className="column-block__text">1</li>
-                </ul>
-                {this.state.formAddOpen ? (
-                  <FormAddCard
-                    closeAddForm={this.closeAddForm}
-                    handleITeaxAreaText={this.handleITeaxAreaText}
-                  />
-                ) : (
-                  <ButtonAddCard formAddOpen={this.formAddOpen} />
-                )}
-              </div>
-            </div>
+            {this.props.card &&
+              this.props.card[this.props.id].card.map((item, index) => (
+                <div className="column-wrapper" key={index}>
+                  <div className="column-block">
+                    <span className="column-block__title">{item.title}</span>
+                    <ul className="column-block__list">
+                      {item.item.map((items, index) => (
+                        <li className="column-block__text" key={index}>
+                          {items}
+                        </li>
+                      ))}
+                    </ul>
+                    <FormAddCard />
+                    {/*  {this.state.formAddOpen ? (
+                      <FormAddCard
+                        key={index}
+                        closeAddForm={this.closeAddForm}
+                        handleITeaxAreaText={this.handleITeaxAreaText}
+                      />
+                    ) : (
+                      <ButtonAddCard formAddOpen={this.formAddOpen} />
+                    )} */}
+                  </div>
+                </div>
+              ))}
             {this.state.formOpen ? (
               <FormAddColumn
                 closeForm={this.closeForm}
@@ -109,7 +93,8 @@ class Board extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  board: state.app.currentBoard.item,
+  id: state.app.currentBoard.id,
+  card: state.app.board,
 });
 
 export default connect(mapStateToProps, { addCard })(Board);

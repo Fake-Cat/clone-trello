@@ -13,18 +13,31 @@
     color: red !important;
   }
 }
+.btnAddColumn {
+  display: inline-flex !important;
+  margin-right: 20px;
+}
 .formAdd {
   width: 300px;
+  display: inline-block;
+  margin-right: 20px;
+  white-space: nowrap;
 }
 .board-block {
   height: 100vh;
+  min-width: 100vw;
+  max-width: max-content;
 }
 .column {
-  display: flex;
+  /*   display: flex;
   align-items: flex-start;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap; */
   padding: 10px 0 0 10px;
   height: calc(100% - 50px);
+  white-space: nowrap;
+  overflow-x: auto;
+  min-width: 100vw;
+  max-width: max-content;
   &-wrapper {
     width: 290px;
     height: calc(100% - 40px);

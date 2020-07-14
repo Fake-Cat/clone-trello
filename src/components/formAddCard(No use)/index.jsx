@@ -1,8 +1,9 @@
 import React from 'react';
 
-const FormAddCard = ({ closeAddForm, handleITeaxAreaText }) => {
+const FormAddCard = ({ closeAddForm, handleITeaxAreaText, index }) => {
+
   return (
-    <div className="column-form">
+    <div className="column-form" key={index}>
       <textarea
         id="description"
         className="column-form__textarea"

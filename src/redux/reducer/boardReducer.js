@@ -4,15 +4,24 @@ import {
   ADD_CARD_TO_BOARD,
 } from '../action/types';
 
-let initialState = {
+const initialState = {
   board: [
     {
       link: '996b942d-e716-4345-bbe4-d0ea16945887',
-      name: 'Сергей',
+      name: 'Тестовая',
       logo:
         'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
       text: '123123',
-      card: [],
+      card: [
+        {
+          title: '123123123',
+          item: [
+            'Пройти курс по React',
+            'Отметить день рождения',
+            'Записаться на курсы английского языка, чтобы уехать жить в Лондон',
+          ],
+        },
+      ],
     },
   ],
   currentBoard: {
@@ -23,7 +32,16 @@ let initialState = {
       logo:
         'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
       text: '123123',
-      card: [],
+      card: [
+        {
+          title: '123123123',
+          item: [
+            'Пройти курс по React',
+            'Отметить день рождения',
+            'Записаться на курсы английского языка, чтобы уехать жить в Лондон',
+          ],
+        },
+      ],
     },
   },
 };
