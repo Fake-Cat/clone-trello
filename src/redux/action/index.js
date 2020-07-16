@@ -1,4 +1,4 @@
-import { CREATE_BOARD, CURRENT_BOARD, ADD_CARD_TO_BOARD } from './types';
+import { CREATE_BOARD, CURRENT_BOARD, ADD_COLUMN_TO_BOARD } from './types';
 import { uuid } from 'uuidv4';
 
 export function createBoard({ name, logo, text }) {
@@ -43,13 +43,13 @@ export function currentBoardSelected(item, id) {
   };
 }
 
-export function addCard(text) {
-  const card = {
+export function addColumn(text) {
+  const column = {
     title: text,
     item: [],
   };
   return {
-    type: ADD_CARD_TO_BOARD,
-    payload: card,
+    type: ADD_COLUMN_TO_BOARD,
+    payload: column,
   };
 }

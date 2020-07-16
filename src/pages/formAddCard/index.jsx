@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 const FormAddCard = () => {
   const [openForm, setOpenForm] = useState(false);
+
   const [card, setCard] = useState(null);
 
   const handleITeaxAreaText = (e) => {
@@ -10,6 +11,7 @@ const FormAddCard = () => {
       card: e.target.value,
     });
   };
+  
   const handleCloseForm = () => {
     setOpenForm(false);
     setCard({

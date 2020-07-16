@@ -1,7 +1,7 @@
 import {
   CREATE_BOARD,
   CURRENT_BOARD,
-  ADD_CARD_TO_BOARD,
+  ADD_COLUMN_TO_BOARD,
 } from '../action/types';
 
 const initialState = {
@@ -58,7 +58,7 @@ export const boardReducer = (state = initialState, action) => {
         ...state,
         currentBoard: action.payload,
       };
-    case ADD_CARD_TO_BOARD:
+    case ADD_COLUMN_TO_BOARD:
       const currentItem = state.currentBoard.id;
       const currentCard = state.board[currentItem].card;
       return {
