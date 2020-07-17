@@ -1,23 +1,21 @@
 import React from 'react';
 import { useState } from 'react';
-import { useCallback } from 'react';
 
-const FormAddColumn = ({click}) => {
+const FormAddColumn = ({ addColumn }) => {
+  
   const [formOpen, setFormOpen] = useState(false);
-
+  
   const [column, setColumn] = useState(null);
 
   const handleInputText = (e) => {
     setColumn(e.target.value);
   };
 
-  const onClickAddColumn = useCallback(() => {
-    click(column);
+  const onClickAddColumn = () => {
+    addColumn(column);
     setFormOpen(false);
     setColumn(null);
-  }, [click, setFormOpen, setColumn, column]);
-
-
+  };
 
   return (
     <React.Fragment>

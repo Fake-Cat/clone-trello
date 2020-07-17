@@ -1,7 +1,7 @@
 import React from 'react';
 import FormAddCard from '../../pages/formAddCard';
 
-const Column = ({ column }) => {
+const Column = React.memo(({ column }) => {
   return (
       <div className="column-wrapper">
         <div className="column-block">
@@ -18,6 +18,6 @@ const Column = ({ column }) => {
         </div>
       </div>
   );
-};
+});
 
 export default Column;
