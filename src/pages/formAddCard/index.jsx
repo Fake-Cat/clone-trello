@@ -1,17 +1,21 @@
 import React from 'react';
 import { useState } from 'react';
 
-const FormAddCard = () => {
+const FormAddCard = ({ onClickAddList, id }) => {
   const [openForm, setOpenForm] = useState(false);
 
   const [card, setCard] = useState(null);
 
   const handleITeaxAreaText = (e) => {
-    setCard({
-      card: e.target.value,
-    });
+    setCard(e.target.value);
   };
-  
+
+  const onclickAddItem = (card, id) => {
+    onClickAddList(card, id);
+    setOpenForm(false);
+    setCard(null);
+  };
+
   const handleCloseForm = () => {
     setOpenForm(false);
     setCard({
@@ -35,7 +39,10 @@ const FormAddCard = () => {
             onChange={handleITeaxAreaText}
           />
           <div className="column-form__button">
-            <button className="waves-effect waves-light btn teal lighten-1">
+            <button
+              className="waves-effect waves-light btn teal lighten-1"
+              onClick={() => onclickAddItem(card, id)}
+            >
               <i className="material-icons left ">add</i> Добавить карточку
             </button>
             <i

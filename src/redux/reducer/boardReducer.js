@@ -2,6 +2,7 @@ import {
   CREATE_BOARD,
   CURRENT_BOARD,
   ADD_COLUMN_TO_BOARD,
+  ADD_LIST_ITEM_TO_COLUMN,
 } from '../action/types';
 
 const initialState = {
@@ -64,6 +65,14 @@ export const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         ...currentCard.push(action.payload),
+      };
+    case ADD_LIST_ITEM_TO_COLUMN:
+      const { id, item } = action.payload;
+      const currentBoard = state.currentBoard.id;
+      const currentColumn = state.board[currentBoard].card[id].item;
+      return {
+        ...state,
+        ...currentColumn.push(item),
       };
     default:
       return state;

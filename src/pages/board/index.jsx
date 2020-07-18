@@ -12,7 +12,6 @@ import './board.scss';
 import { useEffect } from 'react';
 
 const Board = () => {
-
   const id = useSelector((state) => state.app.currentBoard.id);
   const name = useSelector((state) => state.app.board[id].name);
   const card = useSelector((state) => state.app.board[id].card);
@@ -24,7 +23,6 @@ const Board = () => {
     setUpdate();
   }, [update]);
 
-  
   const onClickAddColumn = useCallback(
     (column) => {
       dispatch(addColumn(column));
@@ -39,7 +37,9 @@ const Board = () => {
         <BoardPanel boardName={name} />
         <div className="column">
           {card &&
-            card.map((item, index) => <Column key={index} column={item} />)}
+            card.map((item, index) => (
+              <Column key={index} column={item} id={index} />
+            ))}
           <FormAddColumn addColumn={onClickAddColumn} />
         </div>
       </div>

@@ -1,4 +1,9 @@
-import { CREATE_BOARD, CURRENT_BOARD, ADD_COLUMN_TO_BOARD } from './types';
+import {
+  CREATE_BOARD,
+  CURRENT_BOARD,
+  ADD_COLUMN_TO_BOARD,
+  ADD_LIST_ITEM_TO_COLUMN,
+} from './types';
 import { uuid } from 'uuidv4';
 
 export function createBoard({ name, logo, text }) {
@@ -51,5 +56,16 @@ export function addColumn(text) {
   return {
     type: ADD_COLUMN_TO_BOARD,
     payload: column,
+  };
+}
+
+export function addListItem(item, id) {
+  const items = {
+    item: item,
+    id: id,
+  };
+  return {
+    type: ADD_LIST_ITEM_TO_COLUMN,
+    payload: items
   };
 }
