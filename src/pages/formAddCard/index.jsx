@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-const FormAddCard = ({ onClickAddList, id }) => {
+const FormAddCard = ({ onClickAddList, columnIndex }) => {
   const [openForm, setOpenForm] = useState(false);
 
   const [card, setCard] = useState(null);
@@ -10,8 +10,8 @@ const FormAddCard = ({ onClickAddList, id }) => {
     setCard(e.target.value);
   };
 
-  const onclickAddItem = (card, id) => {
-    onClickAddList(card, id);
+  const onclickAddItem = (card, columnIndex) => {
+    onClickAddList(card, columnIndex);
     setOpenForm(false);
     setCard(null);
   };
@@ -32,7 +32,7 @@ const FormAddCard = ({ onClickAddList, id }) => {
       ) : (
         <div className="column-form">
           <textarea
-            id="description"
+            columnIndex="description"
             className="column-form__textarea"
             name="text"
             placeholder="Введите название карточки"
@@ -41,7 +41,7 @@ const FormAddCard = ({ onClickAddList, id }) => {
           <div className="column-form__button">
             <button
               className="waves-effect waves-light btn teal lighten-1"
-              onClick={() => onclickAddItem(card, id)}
+              onClick={() => onclickAddItem(card, columnIndex)}
             >
               <i className="material-icons left ">add</i> Добавить карточку
             </button>
