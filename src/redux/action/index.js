@@ -74,7 +74,6 @@ export function addListItem(item, id) {
 }
 
 export function reorderList({ source, destination, id }) {
-  debugger;
   return async (dispatch, getState) => {
     const state = getState();
     const { index: sourceCardIndex, droppableId: sourceId } = source;
@@ -88,23 +87,39 @@ export function reorderList({ source, destination, id }) {
     );
     return state.app.board.map((item, currentColumnIndex) => {
       if (destinationColumnIndex === currentColumnIndex) {
-        const [sourceCard] = state.app.board[id].card[
+        let [sourceCard] = state.app.board[id].card[
           sourceColumnIndex
         ].item.splice(sourceCardIndex, 1);
-        const destinationCards = Array.from(
+        let destinationCards = Array.from(
           state.app.board[id].card[sourceColumnIndex].item
         );
         destinationCards.splice(destinationCardIndex, 0, sourceCard);
         state.app.board[id].card[sourceColumnIndex].item = destinationCards;
-        const newList = destinationCards;
+
         dispatch({
           type: REODER_LIST_ITEM_TO_COLUMN,
-          payload: {
-            list: newList,
-            sourceColumnIndex: sourceColumnIndex,
-          },
+        });
+      } else {
+        let [sourceCard] = state.app.board[id].card[
+          sourceColumnIndex
+        ].item.splice(sourceCardIndex, 1);
+        let destinationCards = Array.from(
+          /*выбранная колонка*/
+          state.app.board[id].card[destinationColumnIndex].item
+        );
+        destinationCards.splice(sourceCardIndex, 0, sourceCard);
+        state.app.board[id].card[
+          destinationColumnIndex
+        ].item = destinationCards;
+        let cards = Array.from(
+          state.app.board[id].card[sourceColumnIndex].item
+        );
+        state.app.board[id].card[sourceColumnIndex].item = cards;
+        dispatch({
+          type: REODER_LIST_ITEM_TO_COLUMN,
         });
       }
+
       return item;
     });
   };

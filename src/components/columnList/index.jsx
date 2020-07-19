@@ -2,7 +2,7 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
 const ColumnList = ({ list, cardIndex, columnIndex }) => {
-  return (
+  return typeof list !== 'undefined' ? (
     <Draggable
       draggableId={`card-${columnIndex}-${cardIndex}`}
       index={cardIndex}
@@ -18,7 +18,7 @@ const ColumnList = ({ list, cardIndex, columnIndex }) => {
         </li>
       )}
     </Draggable>
-  );
+  ) : null;
 };
 
 export default ColumnList;

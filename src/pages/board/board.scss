@@ -65,8 +65,9 @@
       font-weight: bold;
     }
     &__list {
-      padding: 0 12px !important;
+      padding: 10px 12px !important;
       overflow-y: auto;
+      min-height: max-content;
     }
     &__text {
       display: flex;
