@@ -23,7 +23,7 @@ const Column = React.memo(({ column, columnIndex, onReorder }) => {
   }, [updateList]);
 
   return (
-    <Droppable droppableId={`column-${columnIndex}`} >
+    <Droppable droppableId={`column-${columnIndex}`}>
       {(provided) => (
         <div
           className="column-wrapper"

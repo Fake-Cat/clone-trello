@@ -1,20 +1,26 @@
 import React from 'react';
 import { useState } from 'react';
+import { useMessage } from '../../hooks/message.hook';
 
 const FormAddColumn = ({ addColumn }) => {
-  
   const [formOpen, setFormOpen] = useState(false);
-  
+
   const [column, setColumn] = useState(null);
 
+  const message = useMessage();
+  
   const handleInputText = (e) => {
     setColumn(e.target.value);
   };
 
   const onClickAddColumn = () => {
-    addColumn(column);
-    setFormOpen(false);
-    setColumn(null);
+    if (column === null) {
+      message('Введите название колонки');
+    } else {
+      addColumn(column);
+      setFormOpen(false);
+      setColumn(null);
+    }
   };
 
   return (

@@ -87,21 +87,18 @@ export function reorderList({ source, destination, id }) {
     );
     return state.app.board[id].card.map((item, currentColumnIndex) => {
       if (destinationColumnIndex === currentColumnIndex) {
+        /*выбранная карточка*/
         const [sourceCard] = state.app.board[id].card[
           sourceColumnIndex
         ].item.splice(sourceCardIndex, 1);
+        /*выбранная колонка*/
         const destinationCards = Array.from(
-          /*выбранная колонка*/
           state.app.board[id].card[destinationColumnIndex].item
         );
         destinationCards.splice(destinationCardIndex, 0, sourceCard);
         state.app.board[id].card[
           destinationColumnIndex
         ].item = destinationCards;
-        const cards = Array.from(
-          state.app.board[id].card[sourceColumnIndex].item
-        );
-        state.app.board[id].card[sourceColumnIndex].item = cards;
         dispatch({
           type: REODER_LIST_ITEM_TO_COLUMN,
         });

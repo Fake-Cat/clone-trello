@@ -1,19 +1,26 @@
 import React from 'react';
 import { useState } from 'react';
+import { useMessage } from '../../hooks/message.hook';
 
 const FormAddCard = ({ onClickAddList, columnIndex }) => {
   const [openForm, setOpenForm] = useState(false);
 
   const [card, setCard] = useState(null);
 
+  const message = useMessage();
+
   const handleITeaxAreaText = (e) => {
     setCard(e.target.value);
   };
 
   const onclickAddItem = (card, columnIndex) => {
-    onClickAddList(card, columnIndex);
-    setOpenForm(false);
-    setCard(null);
+    if (card === null) {
+      message('Введите название карточки');
+    } else {
+      onClickAddList(card, columnIndex);
+      setOpenForm(false);
+      setCard(null);
+    }
   };
 
   const handleCloseForm = () => {
