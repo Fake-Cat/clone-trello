@@ -85,33 +85,20 @@ export function reorderList({ source, destination, id }) {
     const destinationColumnIndex = parseInt(
       destinationId.replace('column-', '')
     );
-    return state.app.board.map((item, currentColumnIndex) => {
+    return state.app.board[id].card.map((item, currentColumnIndex) => {
       if (destinationColumnIndex === currentColumnIndex) {
-        let [sourceCard] = state.app.board[id].card[
+        const [sourceCard] = state.app.board[id].card[
           sourceColumnIndex
         ].item.splice(sourceCardIndex, 1);
-        let destinationCards = Array.from(
-          state.app.board[id].card[sourceColumnIndex].item
-        );
-        destinationCards.splice(destinationCardIndex, 0, sourceCard);
-        state.app.board[id].card[sourceColumnIndex].item = destinationCards;
-
-        dispatch({
-          type: REODER_LIST_ITEM_TO_COLUMN,
-        });
-      } else {
-        let [sourceCard] = state.app.board[id].card[
-          sourceColumnIndex
-        ].item.splice(sourceCardIndex, 1);
-        let destinationCards = Array.from(
+        const destinationCards = Array.from(
           /*выбранная колонка*/
           state.app.board[id].card[destinationColumnIndex].item
         );
-        destinationCards.splice(sourceCardIndex, 0, sourceCard);
+        destinationCards.splice(destinationCardIndex, 0, sourceCard);
         state.app.board[id].card[
           destinationColumnIndex
         ].item = destinationCards;
-        let cards = Array.from(
+        const cards = Array.from(
           state.app.board[id].card[sourceColumnIndex].item
         );
         state.app.board[id].card[sourceColumnIndex].item = cards;
@@ -119,7 +106,6 @@ export function reorderList({ source, destination, id }) {
           type: REODER_LIST_ITEM_TO_COLUMN,
         });
       }
-
       return item;
     });
   };

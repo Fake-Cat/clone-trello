@@ -31,13 +31,6 @@ const Board = ({ reorderList }) => {
     [dispatch]
   );
 
-  /* const reorderListCallback = useCallback(
-    (source, destination) => {
-      dispatch(reorderList({ source, destination }));
-    },
-    [dispatch]
-  ); */
-
   const onDragEnd = (result) => {
     const { source, destination } = result;
     if (

@@ -17,11 +17,22 @@ const initialState = {
       card: [
         {
           title: 'Тестовая',
-          item: ['как дела', 'Привет', 'что делаешь'],
+          item: [
+            'как дела',
+            'Привет',
+            'что делаешь',
+            'как дела',
+            'Привет',
+            'что делаешь',
+          ],
         },
         {
           title: 'Тестовая2',
           item: ['Привет2', 'как дела2', 'что делаешь2'],
+        },
+        {
+          title: 'Тестовая3',
+          item: ['Привет3', 'как дела3', 'что делаешь3'],
         },
       ],
     },
@@ -53,11 +64,22 @@ const initialState = {
       card: [
         {
           title: 'Тестовая',
-          item: ['Привет', 'как дела', 'что делаешь'],
+          item: [
+            'как дела',
+            'Привет',
+            'что делаешь',
+            'как дела',
+            'Привет',
+            'что делаешь',
+          ],
         },
         {
           title: 'Тестовая2',
           item: ['Привет2', 'как дела2', 'что делаешь2'],
+        },
+        {
+          title: 'Тестовая3',
+          item: ['Привет3', 'как дела3', 'что делаешь3'],
         },
       ],
       id: 0,
@@ -93,8 +115,6 @@ export const boardReducer = (state = initialState, action) => {
         ...currentColumn.push(item),
       };
     case REODER_LIST_ITEM_TO_COLUMN: {
-      /* const { sourceColumnIndex, list } = action.payload; */
-      /* const reorderList = state.board[sourceColumnIndex].card; */
       return {
         ...state,
       };
