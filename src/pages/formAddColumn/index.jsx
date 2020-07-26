@@ -33,13 +33,13 @@ const FormAddColumn = ({ addColumn }) => {
             name="text"
             onChange={handleInputText}
           />
-          <label htmlFor="description">Введите название карточки</label>
+          <label htmlFor="description">Введите название колонки</label>
           <div className="valign-wrapper">
             <button
               className="waves-effect waves-light btn teal lighten-1  flex-1"
               onClick={() => onClickAddColumn(column)}
             >
-              <i className="material-icons left ">add</i> Добавить карточку
+              <i className="material-icons left ">add</i> Добавить колонку
             </button>
             <i
               className="material-icons right close"

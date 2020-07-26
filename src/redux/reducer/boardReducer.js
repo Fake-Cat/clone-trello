@@ -36,26 +36,10 @@ const initialState = {
         },
       ],
     },
-    {
-      link: '91b658d2-e8f3-4816-b32b-f93171252489',
-      name: 'Тестовая-2',
-      logo:
-        'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png',
-      text: '123123123',
-      card: [
-        {
-          title: 'Тестовая-1',
-          item: ['Тестовая', 'что-что', 'там-там'],
-        },
-        {
-          title: 'Тестовая-2',
-          item: ['2', '11', '3'],
-        },
-      ],
-    },
   ],
   currentBoard: [
     {
+      id: 0,
       link: '0b85172a-2228-422d-8224-11cce63fd62e',
       name: 'Тестовая',
       logo:
@@ -82,7 +66,6 @@ const initialState = {
           item: ['Привет3', 'как дела3', 'что делаешь3'],
         },
       ],
-      id: 0,
     },
   ],
 };

@@ -41,8 +41,8 @@ export function createBoard({ name, logo, text }) {
 export function currentBoardSelected(item, id) {
   const currentItem = [
     {
+      id,
       ...item,
-      id: id,
     },
   ];
   return {
