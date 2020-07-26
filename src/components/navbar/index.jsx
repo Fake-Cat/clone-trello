@@ -15,7 +15,7 @@ const Navbar = () => {
             <Link to="/create">Создать</Link>
           </li>
           <li>
-            <Link to="/list-of-board">Список таблиц</Link>
+            <Link to="/list-of-board">Список досок</Link>
           </li>
         </ul>
       </div>
