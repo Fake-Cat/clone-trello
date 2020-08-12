@@ -83,19 +83,33 @@ export const boardReducer = (state = initialState, action) => {
         currentBoard: action.payload,
       };
     case ADD_COLUMN_TO_BOARD:
-      const currentItem = state.currentBoard[0].id;
-      const currentCard = state.board[currentItem].card;
       return {
         ...state,
-        ...currentCard.push(action.payload),
+        board: state.board.map((item) => {
+          return {
+            ...item,
+            card: item.card.concat(action.payload),
+          };
+        }),
       };
     case ADD_LIST_ITEM_TO_COLUMN:
-      const { id, item } = action.payload;
-      const currentBoard = state.currentBoard[0].id;
-      const currentColumn = state.board[currentBoard].card[id].item;
+      const { id, columnItem } = action.payload;
       return {
         ...state,
-        ...currentColumn.push(item),
+        board: state.board.map((item) => {
+          return {
+            ...item,
+            card: item.card.map((card, key) => {
+              if (key === id) {
+                return {
+                  title: card.title,
+                  item: [...card.item, columnItem],
+                };
+              }
+              return card;
+            }),
+          };
+        }),
       };
     case REODER_LIST_ITEM_TO_COLUMN: {
       return {

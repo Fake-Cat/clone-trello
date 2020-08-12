@@ -64,7 +64,7 @@ export function addColumn(text) {
 
 export function addListItem(item, id) {
   const items = {
-    item: item,
+    columnItem: item,
     id: id,
   };
   return {
