@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, connect } from 'react-redux';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import BoardPanel from '../../components/boardPanel';
 import Column from '../../components/column';
 import FormAddColumn from '../../pages/formAddColumn';
 import { addColumn, reorderList } from '../../redux/action';
+
 import './board.scss';
-import { useEffect } from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
+
 
 const Board = ({ reorderList }) => {
   const id = useSelector((state) => state.app.currentBoard[0].id);
@@ -17,16 +18,10 @@ const Board = ({ reorderList }) => {
   const card = useSelector((state) => state.app.board[id].card);
   const dispatch = useDispatch();
 
-  const [update, setUpdate] = useState(null);
-
-  useEffect(() => {
-    setUpdate();
-  }, [update]);
 
   const onClickAddColumn = useCallback(
     (column) => {
       dispatch(addColumn(column));
-      setUpdate(column);
     },
     [dispatch]
   );
